@@ -1,0 +1,917 @@
+:root {
+  --pink: #ff7ac6;
+  --soft: #ffd3ee;
+  --blue: #9fd6ff;
+  --lilac: #c9b8ff;
+  --chrome: #eef0f8;
+  --ink: #3a2057;
+
+  --display: 'Bagel Fat One', 'Arial Rounded MT Bold', system-ui, sans-serif;
+  --ui: 'Pixelify Sans', 'Courier New', monospace;
+
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* =========================
+   GLOBAL & LAYOUT
+========================= */
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--ui);
+  font-size: 17px;
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  background: linear-gradient(
+    135deg,
+    #ffc2e6,
+    #bfe3ff 45%,
+    #d9c8ff 70%,
+    #ffd9f0
+  );
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+#app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 430px;
+  overflow: hidden;
+  background: linear-gradient(
+    170deg,
+    rgba(255, 255, 255, 0.55),
+    rgba(255, 255, 255, 0) 40%
+  );
+  transition: background 0.8s;
+}
+
+#app.night {
+  background: linear-gradient(
+    180deg,
+    #0b0620,
+    #2a1458 70%,
+    #4b2478
+  );
+  color: #fff;
+}
+
+@media (min-width: 480px) {
+  #app {
+    height: min(100%, 820px);
+    border: 3px solid var(--ink);
+    border-radius: 30px;
+    box-shadow: 8px 8px 0 var(--ink);
+  }
+}
+
+.sc {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  padding: 44px 18px 22px;
+  overflow: auto;
+}
+
+.sc.on {
+  display: flex;
+  animation: in 0.45s;
+}
+
+@keyframes in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+
+#dots {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  z-index: 5;
+}
+
+#dots i {
+  width: 11px;
+  height: 11px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: #fff;
+}
+
+#dots i.d {
+  background: var(--pink);
+}
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
+h1,
+h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  margin: 0;
+  color: #fff;
+  -webkit-text-stroke: 2px var(--ink);
+  text-shadow: 3px 3px 0 var(--pink);
+  line-height: 1.05;
+}
+
+h1 {
+  font-size: clamp(34px, 11vw, 52px);
+}
+
+h2 {
+  font-size: clamp(28px, 8vw, 38px);
+}
+
+p {
+  margin: 8px 0;
+}
+
+/* =========================
+   BUTTONS & UTILITIES
+========================= */
+
+.btn {
+  align-self: center;
+  margin-top: 16px;
+  padding: 12px 22px;
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #fff, var(--soft));
+  box-shadow: 3px 3px 0 var(--ink);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+button:focus-visible {
+  outline: 3px dashed var(--ink);
+  outline-offset: 3px;
+}
+
+.hide {
+  display: none !important;
+}
+
+/* =========================
+   1. LOCK SCREEN
+========================= */
+
+.time {
+  font-family: var(--display);
+  font-size: 72px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.date {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.notif {
+  background: rgba(255, 255, 255, 0.85);
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  padding: 10px 14px;
+  box-shadow: 3px 3px 0 var(--ink);
+  margin-bottom: 14px;
+}
+
+.pin {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 6px 0 12px;
+}
+
+.pin i {
+  width: 18px;
+  height: 18px;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  background: #fff;
+}
+
+.pin i.f {
+  background: var(--ink);
+}
+
+.pin.bad {
+  animation: sh 0.35s;
+}
+
+@keyframes sh {
+  25% {
+    transform: translateX(-10px);
+  }
+
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+.pad {
+  display: grid;
+  grid-template-columns: repeat(3, 64px);
+  gap: 10px;
+  justify-content: center;
+}
+
+.pad button {
+  height: 56px;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  background: #fff;
+  font-size: 22px;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+#hint {
+  text-align: center;
+  min-height: 24px;
+  margin: 10px 0 0;
+  font-size: 15px;
+}
+
+.link {
+  background: none;
+  border: 0;
+  text-decoration: underline;
+  align-self: center;
+  margin-top: 6px;
+  font-size: 15px;
+}
+
+/* =========================
+   2. CHAT
+========================= */
+
+.chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 14px 0;
+  overflow: auto;
+}
+
+.b {
+  max-width: 80%;
+  padding: 10px 14px;
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  background: #fff;
+  animation: in 0.25s;
+}
+
+.b.me {
+  align-self: flex-end;
+  background: var(--pink);
+  color: #fff;
+  text-shadow: 1px 1px 0 var(--ink);
+}
+
+.ch {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ch button {
+  padding: 10px;
+  border: 3px dashed var(--ink);
+  border-radius: 14px;
+  background: var(--soft);
+}
+
+/* =========================
+   3. PHOTO STRIP
+========================= */
+
+.strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.card {
+  aspect-ratio: 3 / 4;
+  perspective: 700px;
+  border: 0;
+  background: none;
+  padding: 0;
+  position: relative;
+}
+
+.card span {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 10px;
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 3px 3px 0 var(--pink);
+  backface-visibility: hidden;
+  transition: transform 0.5s;
+}
+
+.card .bk {
+  transform: rotateY(180deg);
+  background: var(--blue);
+  font-size: 15px;
+}
+
+.card.fl .ft {
+  transform: rotateY(180deg);
+}
+
+.card.fl .bk {
+  transform: none;
+}
+
+.card .ft {
+  font-size: 44px;
+}
+
+.card .ft img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 7px;
+}
+
+/* =========================
+   PHOTO COLLAGE
+========================= */
+
+.col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.ct {
+  aspect-ratio: 1;
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 8px;
+  box-shadow: 3px 3px 0 var(--ink);
+  transform: rotate(-2deg);
+}
+
+.ct:nth-child(even) {
+  transform: rotate(2deg);
+}
+
+.ct.w {
+  grid-column: span 2;
+  aspect-ratio: 2 / 1;
+}
+
+.ct img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  margin: -8px;
+  padding: 0;
+}
+
+.ct.ph {
+  font-size: 58px;
+  padding: 0;
+}
+
+.ct.tx {
+  font-family: var(--display);
+  font-size: clamp(17px, 5.4vw, 24px);
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+/* =========================
+   SOUNDTRACK & PLAYLIST
+========================= */
+
+.sl {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.sl button {
+  text-align: left;
+  padding: 12px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.sl button.a {
+  background: var(--soft);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.pl {
+  margin-top: 12px;
+  padding: 16px;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: var(--chrome);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.pl p {
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+.pl .btn {
+  margin-top: 6px;
+}
+
+/* =========================
+   4. BIRTHDAY CAKE
+========================= */
+
+.cake {
+  position: relative;
+  width: 220px;
+  margin: 62px auto 10px;
+}
+
+.lay {
+  height: 46px;
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  background: var(--pink);
+  margin-top: -3px;
+}
+
+.lay.t {
+  width: 70%;
+  margin: 0 auto;
+  background: #fff;
+}
+
+.lay.m {
+  background: var(--lilac);
+}
+
+.cd {
+  position: absolute;
+  top: -62px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 6px;
+  z-index: 2;
+}
+
+.cn {
+  position: relative;
+  width: 38px;
+  height: 64px;
+  border: 0;
+  background: none;
+  padding: 0;
+}
+
+.cn .st {
+  position: absolute;
+  bottom: 0;
+  left: 13px;
+  width: 12px;
+  height: 38px;
+  background: repeating-linear-gradient(
+    45deg,
+    #fff 0 6px,
+    var(--blue) 6px 12px
+  );
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+}
+
+.cn .fl {
+  position: absolute;
+  bottom: 40px;
+  left: 11px;
+  width: 16px;
+  height: 22px;
+  background: radial-gradient(
+    #fff 15%,
+    #ffd34d 45%,
+    #ff8a3d
+  );
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  transform-origin: 50% 100%;
+  animation: fk 0.35s infinite alternate;
+  box-shadow: 0 0 14px #ffb347;
+}
+
+@keyframes fk {
+  to {
+    transform: scale(0.88, 1.12) rotate(5deg);
+  }
+}
+
+.cn.off .fl {
+  display: none;
+}
+
+.sm {
+  position: absolute;
+  bottom: 48px;
+  left: 14px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(80, 60, 100, 0.45);
+  animation: sm 1.5s forwards;
+  pointer-events: none;
+}
+
+@keyframes sm {
+  to {
+    transform: translate(10px, -70px) scale(3.2);
+    opacity: 0;
+  }
+}
+
+.say {
+  text-align: center;
+  min-height: 50px;
+}
+
+/* =========================
+   REASONS CARDS
+========================= */
+
+.rg {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 14px 0;
+}
+
+.rc {
+  aspect-ratio: 3 / 4;
+  position: relative;
+  perspective: 600px;
+  border: 0;
+  background: none;
+  padding: 0;
+}
+
+.rc span {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 6px;
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+  backface-visibility: hidden;
+  transition: transform 0.5s;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.rc .ft {
+  background: linear-gradient(160deg, var(--soft), var(--lilac));
+  font-family: var(--display);
+  font-size: 28px;
+  color: var(--ink);
+}
+
+.rc .ft small {
+  display: block;
+  font-family: var(--ui);
+  font-size: 20px;
+}
+
+.rc .bk {
+  transform: rotateY(180deg);
+  background: #fff;
+  font-size: 12.5px;
+  line-height: 1.25;
+}
+
+.rc.fl .ft {
+  transform: rotateY(180deg);
+}
+
+.rc.fl .bk {
+  transform: none;
+}
+
+.spec {
+  background: #fff;
+  border: 3px dashed var(--pink);
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+  white-space: pre-line;
+}
+
+/* =========================
+   UNIVERSE / STAR MAP
+========================= */
+
+.sky {
+  position: relative;
+  height: 370px;
+  margin: 12px 0;
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  background: radial-gradient(
+    circle at 30% 20%,
+    #3b2a7a,
+    #120a35 70%
+  );
+  overflow: hidden;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.sky svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.sky line {
+  stroke: #ffe9a8;
+  stroke-width: 1.6;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.85;
+}
+
+.sk {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 0;
+  background: none;
+  font-size: 22px;
+  color: #fff;
+  opacity: 0.7;
+  animation: tw 2s infinite alternate;
+}
+
+.sk.on {
+  color: #ffe36e;
+  opacity: 1;
+  animation: none;
+  text-shadow: 0 0 12px #ffd34d;
+  font-size: 28px;
+}
+
+@keyframes tw {
+  to {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+}
+
+.msg {
+  min-height: 72px;
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+/* =========================
+   ENDING & NIGHT MODE
+========================= */
+
+#ns {
+  position: absolute;
+  inset: 0;
+  display: none;
+  pointer-events: none;
+}
+
+#app.night #ns {
+  display: block;
+}
+
+#ns i {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #fff;
+  animation: tw 2.5s infinite alternate;
+}
+
+#s9 {
+  z-index: 1;
+  align-items: center;
+  text-align: center;
+}
+
+.lt {
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 14px;
+  padding: 18px 16px;
+  box-shadow: 5px 5px 0 var(--pink);
+  text-align: center;
+  margin-top: 6px;
+  background-image: repeating-linear-gradient(
+    transparent 0 27px,
+    #f3e6fa 27px 28px
+  );
+}
+
+.lt h1 {
+  font-size: clamp(28px, 9vw, 40px);
+}
+
+.lt .fav {
+  border-color: var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  transform: rotate(-2deg);
+}
+
+.lt .body {
+  text-align: left;
+  line-height: 1.65;
+}
+
+.lt .body p {
+  margin: 0 0 14px;
+}
+
+#s9 h1 {
+  font-size: clamp(28px, 9vw, 40px);
+}
+
+.fav {
+  width: 190px;
+  height: 190px;
+  margin: 16px auto 8px;
+  border: 4px solid #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  font-size: 80px;
+  background: linear-gradient(135deg, var(--pink), var(--lilac));
+  box-shadow: 0 0 28px rgba(255, 150, 220, 0.6);
+}
+
+.fav img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#et {
+  white-space: pre-line;
+  line-height: 1.55;
+  min-height: 150px;
+  text-align: center;
+}
+
+.tix {
+  display: flex;
+  border: 3px solid var(--ink);
+  border-radius: 14px;
+  overflow: hidden;
+  background: linear-gradient(
+    90deg,
+    var(--blue),
+    var(--lilac),
+    var(--pink)
+  );
+  box-shadow: 4px 4px 0 var(--ink);
+  color: var(--ink);
+  text-align: left;
+  margin-top: 12px;
+  width: 100%;
+}
+
+.tix div {
+  padding: 12px 14px;
+  flex: 1;
+}
+
+.tix div + div {
+  flex: 0 0 74px;
+  border-left: 3px dashed var(--ink);
+  display: grid;
+  place-items: center;
+  font-size: 32px;
+}
+
+/* =========================
+   FLOATING HEARTS & POPUPS
+========================= */
+
+.heart {
+  position: fixed;
+  top: -30px;
+  z-index: 60;
+  pointer-events: none;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+.pop {
+  position: fixed;
+  z-index: 60;
+  pointer-events: none;
+  animation: pp 2.6s ease-out forwards;
+}
+
+@keyframes pp {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  25% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-50px) scale(1);
+    opacity: 0;
+  }
+}
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .sc.on,
+  .b,
+  .pin.bad,
+  .heart,
+  .pop,
+  .sk,
+  #ns i,
+  .cn .fl {
+    animation: none;
+  }
+}

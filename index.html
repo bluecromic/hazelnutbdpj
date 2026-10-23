@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday ♡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Pixelify+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+<div id="ns"></div>
+<div id="dots" aria-hidden="true"></div>
+
+<section class="sc on" id="s0" aria-label="Layar kunci">
+  <div class="time" id="tm">00:00</div>
+  <div class="date" id="dt"></div>
+  <div class="notif" id="nt"></div>
+  <div class="pin" id="pin"><i></i><i></i><i></i><i></i></div>
+  <div class="pad" id="pad"></div>
+  <p id="hint"></p>
+  <button class="link" id="hb">Lupa kodenya?</button>
+</section>
+
+<section class="sc" id="s1" aria-label="Chat">
+  <h2 id="c-t"></h2>
+  <div class="chat" id="chat" aria-live="polite"></div>
+  <div class="ch" id="ch"></div>
+  <button class="btn hide" id="n1">Lanjut ▶</button>
+</section>
+
+<section class="sc" id="s2" aria-label="Photo booth">
+  <h2>My favorite photo</h2>
+  <p>tap foto saang</p>
+  <div class="strip" id="strip"></div>
+  <button class="btn" id="n2">Lanjut ▶</button>
+</section>
+
+<section class="sc" id="s3" aria-label="Kolase">
+  <h2>Our Poster ♡</h2>
+  <div class="col" id="col"></div>
+  <button class="btn" id="n3">Lanjut ▶</button>
+</section>
+
+
+<section class="sc" id="s4" aria-label="Playlist">
+  <h2>Playlist Gua ♡</h2>
+
+  <div class="sl" id="sl"></div>
+
+  <div class="pl" id="pl">
+    <b id="pj"></b>
+    <br>
+    <small id="pa"></small>
+    <p id="pc"></p>
+
+    <button class="btn" id="pp">▶ Putar</button>
+  </div>
+
+  <button class="btn" id="n4">Lanjut ▶</button>
+</section>
+
+
+<section class="sc" id="s5" aria-label="Kue">
+  <h2>Make a wish ala LDR ✦</h2>
+  <p>ketuk lilin satu per satu atau tiup semuanya.</p>
+  <div class="cake"><div class="cd" id="cd"></div><div class="lay t"></div><div class="lay m"></div><div class="lay"></div></div>
+  <button class="btn" id="bl">💨 Tiup semua lilin</button>
+  <p class="say" id="say"></p>
+  <button class="btn hide" id="n5">Lanjut ▶</button>
+</section>
+
+<section class="sc" id="s6" aria-label="Alasan">
+  <h2>24 Things About You</h2>
+  <p id="rcn"></p>
+  <div class="rg" id="rg"></div>
+  <div class="spec hide" id="rs"></div>
+  <button class="btn hide" id="n6">Lanjut ▶</button>
+</section>
+
+<section class="sc" id="s7" aria-label="Bintang">
+  <h2>Our Universe</h2>
+  <p>Ketuk bintang untuk membuka pesan rahasia. <span id="skn"></span></p>
+  <div class="sky" id="sky"><svg viewBox="0 0 100 100" preserveAspectRatio="none" id="sv"></svg></div>
+  <div class="msg" id="sm">✦ Pilih sebuah bintang.</div>
+  <button class="btn hide" id="n7">Lanjut ▶</button>
+</section>
+
+<section class="sc" id="s8" aria-label="Surat ulang tahun">
+  <div class="lt">
+    <h1 id="lj"></h1>
+    <div class="fav" id="lf"></div>
+    <div class="body" id="lb2"></div>
+  </div>
+  <button class="btn" id="n8">Lanjut ▶</button>
+</section>
+
+
+<section class="sc" id="s9" aria-label="Penutup">
+  <h1 id="ft"></h1>
+  <div class="fav" id="fav"></div>
+  <div id="et" aria-live="polite"></div>
+
+  <button class="btn hide" id="hug">
+    🤗 One Last Hug
+  </button>
+
+  <button class="link hide" id="rp">
+    Ulangi dari awal ♡
+  </button>
+</section>
+</div>
+
+
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
